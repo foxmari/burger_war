@@ -145,8 +145,12 @@ class TeriyakiBurger():
             x = self.speed
         elif self.innerstate == 'back':
             # set speed x axis
-            z = -0.2
+            z = -0.08
             x = -1 * self.speed
+        elif self.innerstate == 'endturn':
+            # set speed x axis
+            z = 0.4
+            x = 0
         else:
             # error state
             x = 0
@@ -179,6 +183,8 @@ class TeriyakiBurger():
         elif self.innerstate == 'go' and abs(self.now_add_wheel_rot_l) > 30:
             self.innerstate = 'back'
         elif self.innerstate == 'back' and abs(self.now_add_wheel_rot_l) < 5:
+            self.innerstate = 'endturn'
+        elif self.innerstate == 'endturn' and abs(self.now_add_wheel_rot_l) < 2:
             self.innerstate = 'end'
             self.state = 'outer'
 
