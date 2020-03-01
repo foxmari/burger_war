@@ -204,14 +204,13 @@ class TeriyakiBurger():
         elif self.innerstate =='end':
             self.state = 'outer'
             twist = self.twist
-            if 0.2 > abs(self.pose_y) :
-                self.innerstate == "turn"
+            if 0.6 < abs(self.pose_y) :
+                self.innerstate = 'turn'
 
-        else:
+        elif self.state == 'outer':
             # set speed x axis
             twist = self.twist
-            if 0.2 > abs(self.pose_y) :
-                self.innerstate == "turn"
+            self.innerstate == "turn"
         return twist
 
     def calcState(self):
@@ -240,7 +239,7 @@ class TeriyakiBurger():
             self.calcState()
             self.calcInnerState()
             self.now_add_wheel_rot_l = abs(self.wheel_rot_l) - abs(self.now_wheel_rot_l)
-            print(self.now_add_wheel_rot_l ,abs(self.wheel_rot_l) ,abs(self.now_wheel_rot_l),self.innerstate)
+            print(self.now_add_wheel_rot_l ,abs(self.wheel_rot_l) ,abs(self.now_wheel_rot_l),self.innerstate,self.pose_y)
 
             ## update twist
             twist = self.calcTwist()
